@@ -5,13 +5,11 @@ This project is a reconstruction of the Muduo network library using C++11, based
 
 ### Concurrency model
 ![image](https://github.com/user-attachments/assets/886c52a7-aa8e-4bb0-a306-75ddaebafb06)
-The project adopts a master-slave multi-Reactor multi-thread model. The MainReactor is solely responsible for monitoring and dispatching new connections. Within the MainReactor, an Acceptor receives incoming connections and distributes them to SubReactors using a predefined round-robin algorithm. 
+The project adopts a master-slave multi-Reactor multi-thread model. The MainReactor is solely responsible for monitoring and dispatching new connections. Within the MainReactor, an Acceptor receives incoming connections and distributes them to SubReactors using a predefined round-robin algorithm. The SubReactors handle the read/write events of their assigned connections. 
 
-The SubReactors handle the read/write events of their assigned connections. 
+When the start function of the TcpServer is called, a thread pool is internally created. Each thread in the pool independently runs an EventLoop (a SubReactor). The MainReactor selects a SubReactor from the thread pool via round-robin scheduling and assigns new connections to it. 
 
-When the start function of the TcpServer is called, a thread pool is internally created. Each thread in the pool independently runs an event loop (a SubReactor). The MainReactor selects a SubReactor from the thread pool via round-robin scheduling and assigns new connections to it. 
-
-The number of SubReactors dedicated to handling read/write events is typically equal to the number of CPU cores, ensuring optimal resource utilization and parallelism. 
+The number of SubReactors dedicated to handling read/write events is typically equal to the number of CPU cores. 
 
 ### QuickStart
 This project runs on Linux and requires the following dependencies:
