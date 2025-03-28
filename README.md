@@ -16,7 +16,7 @@ This project runs on Linux and requires the following dependencies:
 - CMake 3.0 and above
 - g++ 4.8.1 and above
 
-run the autobuild script:
+Run the autobuild script:
 ```sh
 ./autobuild.sh
 ```
