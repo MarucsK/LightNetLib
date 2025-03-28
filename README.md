@@ -11,11 +11,12 @@ When the start function of the TcpServer is called, a thread pool is internally 
 
 The number of SubReactors dedicated to handling read/write events is typically equal to the number of CPU cores. 
 
-### QuickStart
-This project runs on Linux and requires the following dependencies:
-- CMake 3.0 and above
-- g++ 4.8.1 and above
+### Development Environment
+- Linux kernel version 6.8.0-52-generic (ubuntu 22.04)
+- CMake 3.22.1
+- gcc 11.4.0
 
+### QuickStart
 Run the autobuild script:
 ```sh
 ./autobuild.sh
