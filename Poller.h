@@ -23,18 +23,15 @@ public:
     virtual void updateChannel(Channel *channel) = 0;
     virtual void removeChannel(Channel *channel) = 0;
 
-    // 判断当前Poller中是否有这个channedl
     bool hasChannel(Channel *channel) const;
 
     // EventLoop可以通过此接口获取默认的IO复用的具体实现 --- 本项目仅实现epoll
     static Poller *newDefaultPoller(EventLoop *loop);
 
 protected:
-    // map的key表示：sockfd   value：sockfd所属的Channel 
-    // (1个sockfd和1个Channel一一对应，一个Poller监听多个Channel)
     using ChannelMap = std::unordered_map<int, Channel *>;
     ChannelMap channels_;
 
 private:
-    EventLoop *ownerLoop_; // 定义Poller所属的事件循环EventLoop
+    EventLoop *ownerLoop_;
 };
