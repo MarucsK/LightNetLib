@@ -69,7 +69,6 @@ public:
     void log(std::string msg);
 
 private:
-    // 构造函数私有化
     Logger(){}
 
     int logLevel_; // 日志级别
