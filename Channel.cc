@@ -51,6 +51,7 @@ void Channel::handleEvent(Timestamp receiveTime){
         handleEventWithGuard(receiveTime);
     }
 }
+
 // 根据poller通知的channel发生的具体事件，由channel负责调用具体的回调操作
 void Channel::handleEventWithGuard(Timestamp receiveTime){
     LOG_INFO("channel handleEvent revents:%d\n", revents_);
