@@ -15,7 +15,7 @@ class Poller;
 
 /// Reactor
 
-// 事件循环类 主要包含两个大模块 Channel Poller(epoll的抽象)
+// 事件循环类 : Channel Poller
 class EventLoop : noncopyable {
 public:
     using Functor = std::function<void()>;
@@ -34,7 +34,6 @@ public:
     void runInLoop(Functor cb);
     // 把cb放入队列中，唤醒loop所在线程，执行cb
     void queueInLoop(Functor cb);
-
     // 唤醒loop所在的线程
     void wakeup();
 
@@ -43,7 +42,6 @@ public:
     void removeChannel(Channel *channel);
     bool hasChannel(Channel *channel);
 
-    // 判断EventLoop对象是否在自己的线程里
     bool isInLoopThread() const { return threadId_ == CurrentThread::tid(); }
 
 private:
