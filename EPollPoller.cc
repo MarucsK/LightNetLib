@@ -27,7 +27,6 @@ EPollPoller::~EPollPoller(){
     ::close(epollfd_);
 }
 
-
 // channel:update remove => EventLoop:updateChannel removeChannel => Poller:updateChannel removeChannel
 /*
                EventLoop
@@ -92,10 +91,7 @@ void EPollPoller::update(int operation, Channel *channel) {
     }
 }
 
-
-
-
-// 相当于epoll_wait
+// epoll_wait
 // activeChannels是传出参数,存储所有发生事件的channel集合
 Timestamp EPollPoller::poll(int timeoutMs, ChannelList *activeChannels)
 {
@@ -129,6 +125,7 @@ Timestamp EPollPoller::poll(int timeoutMs, ChannelList *activeChannels)
     }
     return now;
 }
+
 void EPollPoller::fillActiveChannels(int numEvents, ChannelList *activeChannels) const
 {
     for (int i = 0; i < numEvents; ++i)
