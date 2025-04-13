@@ -8,7 +8,7 @@ Logger &Logger::instance(){
     static Logger logger;
     return logger;
 }
-// 设置日志级别
+
 void Logger::setLogLevel(int level){
     logLevel_ = level;
 }
@@ -32,6 +32,5 @@ void Logger::log(std::string msg){
     default:
         break;
     }
-    // 打印时间和msg
     std::cout << Timestamp::now().toString() << " : " << msg << std::endl;
 }
