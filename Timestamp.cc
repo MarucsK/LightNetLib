@@ -23,17 +23,3 @@ std::string Timestamp::toString() const{
              tm_time->tm_sec);
     return buf;
 }
-// #include <iostream>
-// int main(){
-//     std::cout << Timestamp::now().toString() << std::endl;
-//     /*
-//     Timestamp::now()：
-//         首先用time(NULL)获取当前时间的时间戳
-//         然后传给Timestamp拷贝构造函数，构造一个Timestamp对象
-//         此Timestamp对象的microSecondsSinceEpoch_成员变量值为 这个时间戳
-//     .toString()：
-//         对当前这个对象调用成员方法toString()
-//         将该对象里的时间戳转成tm结构
-//         然后按照年月日时分秒 存到buf中，返回buf
-//     */
-// }
