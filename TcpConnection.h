@@ -90,8 +90,8 @@ private:
     Buffer outputBuffer_; // 暂存待发送数据，应对TCP发送窗口满的情况。
 };
 
-/**理解：
- * 务必注意：socket_封装的是：服务器端的 与客户端通信的文件描述符！！！
+/**
+ * socket_封装服务器端的 与客户端通信的文件描述符
  * (1)客户端发送数据 -> EventLoop监听到socket可读事件,调用TcpConnection::handleRead() -> handleRead()从socket读取数据到inputBuffer
  *    -> 数据存入inputBuffer后，触发messageCallback_，从inputBuffer读数据，供服务器处理数据 (messageCallback_中就可以执行服务器发送数据,把数据原封不动发回去)
  * (2)服务器发送数据,TcpConnection::send() -> 先写入socket_的写缓冲区,没写完的数据暂存在outputBuffer_
