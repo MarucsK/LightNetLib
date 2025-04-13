@@ -12,7 +12,6 @@
 // 防止一个线程创建多个EventLoop
 thread_local EventLoop *t_loopInThisThread = nullptr;
 
-// 定义默认的Poller IO复用接口的超时时间
 const int kPollTimeMs = 10000;
 
 /*
@@ -84,10 +83,6 @@ void EventLoop::loop(){
             channel->handleEvent(pollReturnTime_);
         }
         // 执行当前EventLoop事件循环需要处理的回调操作
-        /*
-        IO线程(mainLoop) accept-> fd->channel 
-        mainLoop事先注册一个cb(需要subloop执行)  mainloop wakeup subloop后,执行下面的方法,执行之前mainloop注册的回调(最起码把新channel注册到subloop的poller上吧)
-        */
         doPendingFunctors();
     }
     LOG_INFO("EventLoop %p stop looping. \n", this);
@@ -144,11 +139,6 @@ void EventLoop::queueInLoop(Functor cb){
     }
 }
 
-// 作用 : 唤醒loop对应的线程 : 向wakeupfd_写一个数据,wakeupChannel发生读事件,当前loop线程会被唤醒
-// 疑惑 : wakeup()如何精准的唤醒此loop对应的线程，而不唤醒其他线程 ???
-// Ans : 要注意! 是当前loop在其他线程中执行wakeup(), 而当前loop对应的线程正阻塞
-//       那么写入的wakeupFd_就是当前loop的wakeupFd_,然后wakeupChannel发生读事件
-//       当前loop对应的线程就会由于监听的wakeupfd被唤醒(而非 由于client)
 void EventLoop::wakeup(){
     uint64_t one = 1;
     ssize_t n = write(wakeupFd_, &one, sizeof(one));
