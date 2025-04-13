@@ -38,7 +38,6 @@ TcpConnection::TcpConnection(EventLoop *loop,
     , peerAddr_(peerAddr)
     , highWaterMark_(64*1024*1024) // 64M
 {
-    // 给channel_设置相应的回调函数,poller给channel通知它感兴趣的事件发生,channel会回调相应的操作函数
     channel_->setReadCallback(std::bind(&TcpConnection::handleRead, this, std::placeholders::_1));
     channel_->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
     channel_->setCloseCallback(std::bind(&TcpConnection::handleClose, this));
