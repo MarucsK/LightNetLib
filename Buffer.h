@@ -23,7 +23,6 @@
             读取了一些数据:           readerIndex_            writerIndex_
 */
 
-// 网络库底层的缓冲区
 class Buffer{
 public:
     static const size_t kCheapPrepend = 8; // 预留给协议头等前缀的空间
