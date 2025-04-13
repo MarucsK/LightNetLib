@@ -21,7 +21,6 @@ public:
 
     void start(const ThreadInitCallback &cb = ThreadInitCallback());
 
-    // 如果工作在多线程中,baseLoop_默认以轮询的方式 分配channel给subloop
     EventLoop *getNextLoop();
 
     std::vector<EventLoop *> getAllLoops();
