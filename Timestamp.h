@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 
-// 时间类
 class Timestamp{
 public:
     Timestamp();
