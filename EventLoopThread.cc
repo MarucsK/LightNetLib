@@ -18,7 +18,6 @@ EventLoopThread::~EventLoopThread(){
     }
 }
 
-// 作用 : 启动一个新线程,执行threadFunc(创建一个loop),并返回该loop地址
 EventLoop *EventLoopThread::startLoop(){
     thread_.start(); // 启动底层的新线程,执行的就是threadFunc(下面这个方法)
     EventLoop *loop = nullptr;
@@ -31,7 +30,7 @@ EventLoop *EventLoopThread::startLoop(){
     }
     return loop;
 }
-// 下面此方法,是在单独的新线程里运行的
+
 void EventLoopThread::threadFunc(){
     // 创建一个独立的Eventloop,与上面的线程是一一对应的, one loop per thread
     EventLoop loop;
