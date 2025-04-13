@@ -17,20 +17,17 @@ Thread::Thread(ThreadFunc func, const std::string &name)
 
 Thread::~Thread(){
     if(started_ && !joined_){
-        // 分离线程
         thread_->detach();
     }
 }
 
-void Thread::start(){ // 一个Thread对象记录的就是一个新线程的详细信息
+void Thread::start(){
     started_ = true;
     sem_t sem;
     sem_init(&sem, false, 0);
     thread_ = std::shared_ptr<std::thread>(new std::thread([&](){ 
-        // 获取线程的tid值
         tid_ = CurrentThread::tid();
         sem_post(&sem);
-        // 开启新线程,专门执行线程函数
         func_(); 
     }));
     sem_wait(&sem);
