@@ -48,7 +48,7 @@ private:
     EventLoop *loop_; // mainloop,运行Acceptor
     std::unique_ptr<Acceptor> acceptor_; // 运行在mainloop,任务就是监听新连接
 
-    const std::string ipPort_; // 服务器
+    const std::string ipPort_;
     const std::string name_;
 
     std::shared_ptr<EventLoopThreadPoll> threadPool_; // subloop threadpool
