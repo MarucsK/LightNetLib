@@ -4,7 +4,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
-// 从fd上读数据,读到buffer中
+// 从fd上读数据到buffer
 ssize_t Buffer::readFd(int fd, int *saveErrno){
     char extrabuf[65536] = {0}; // 栈上的内存空间 64k
     struct iovec vec[2];
@@ -29,7 +29,7 @@ ssize_t Buffer::readFd(int fd, int *saveErrno){
     return n;
 }
 
-// 把buffer中的readable,发送到fd
+// 将buffer::readable写到fd
 ssize_t Buffer::writeFd(int fd, int *saveErrno){
     ssize_t n = ::write(fd, peek(), readableBytes());
     if(n < 0){
