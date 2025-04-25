@@ -8,7 +8,7 @@ This project is a reconstruction of the Muduo network library using C++11, based
 - CMake 3.22.1
 - gcc 11.4.0
 
-### QuickStart
+### Build
 Run the autobuild script:
 ```sh
 ./autobuild.sh
